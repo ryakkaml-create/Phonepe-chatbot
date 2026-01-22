@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhonePe Support Chatbot</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .chatbox {
+      width: 360px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 15px;
+    }
+
+    h3 {
+      text-align: center;
+      color: #5f259f;
+    }
+
+    #chat {
+      height: 280px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .user {
+      text-align: right;
+      color: blue;
+      margin: 6px;
+    }
+
+    .bot {
+      text-align: left;
+      color: green;
+      margin: 6px;
+    }
+
+    input {
+      width: 75%;
+      padding: 8px;
+    }
+
+    button {
+      width: 22%;
+      padding: 8px;
+      background: #5f259f;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="chatbox">
+    <h3>PhonePe Help Chat</h3>
+    <div id="chat"></div>
+
+    <input id="msg" type="text" placeholder="Type your issue..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("msg");
+      const chat = document.getElementById("chat");
+      const text = input.value.toLowerCase();
+
+      if (text.trim() === "") return;
+
+      chat.innerHTML += `<div class="user">${input.value}</div>`;
+
+      let reply = "Sorry, please contact PhonePe customer care.";
+
+      if (text.includes("hi") || text.includes("hello")) {
+        reply = "Hello! How can I help you?";
+      } 
+      else if (text.includes("upi")) {
+        reply = "UPI payment failed. Please check your bank balance or try again later.";
+      } 
+      else if (text.includes("phonepe")) {
+        reply = "Please update the PhonePe app or reinstall it.";
+      } 
+      else if (text.includes("refund")) {
+        reply = "Refund will be credited within 3–5 working days.";
+      } 
+      else if (text.includes("payment")) {
+        reply = "Payment issue detected. Please try after some time.";
+      } 
+      else if (text.includes("bye")) {
+        reply = "Thank you for using PhonePe support chat.";
+      }
+
+      chat.innerHTML += `<div class="bot">${reply}</div>`;
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
